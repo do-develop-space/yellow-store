@@ -1,6 +1,10 @@
-package com.example.demo.member;
+package com.example.demo.service;
 
 import com.example.demo.common.ResponseEntity;
+import com.example.demo.member.Member;
+import com.example.demo.member.MemberRepository;
+import com.example.demo.member.MemberRequest;
+import com.example.demo.member.MemberResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

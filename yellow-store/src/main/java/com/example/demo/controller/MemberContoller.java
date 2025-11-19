@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.common.ResponseEntity;
 import com.example.demo.member.MemberRequest;
 import com.example.demo.member.MemberResponse;
-import com.example.demo.member.MemberService;
+import com.example.demo.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -39,6 +39,7 @@ public class Member {
     @Column(name = "reg_id", nullable = false)
     private UUID regId;
 
+    @Schema(description = "유저의 등록 날짜")
     @Column(name = "reg_date", nullable = false)
     private LocalDateTime regDt;
 
@@ -46,12 +47,14 @@ public class Member {
     @Column(name = "modify_id", nullable = false)
     private UUID modifyId;
 
+    @Schema(description = "유저의 수정 날짜")
     @Column(name = "modify_date", nullable = false)
     private LocalDateTime modifyDt;
 
     @Column(name = "saltkey", nullable = false, length = 14)
     private String saltKey;
 
+    @Schema(description = "유저의 상태")
     @Column(name = "\"flag\"", length = 5, nullable = true)
     private String flag;
 

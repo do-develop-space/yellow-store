@@ -4,10 +4,12 @@ import com.example.demo.member.domain.Member;
 import com.example.demo.member.domain.MemberRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Component
 public class MemberRepositoryAdapter implements MemberRepository {
 
     private final MemberJpaRepository memberJpaRepository;

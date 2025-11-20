@@ -1,12 +1,14 @@
-package com.example.demo.controller;
+package com.example.demo.member.presentation;
 
 import com.example.demo.common.ResponseEntity;
-import com.example.demo.member.MemberRequest;
+import com.example.demo.member.application.dto.MemberInfo;
+import com.example.demo.member.presentation.dto.MemberRequest;
 import com.example.demo.member.MemberResponse;
-import com.example.demo.service.MemberService;
+import com.example.demo.member.application.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -23,8 +25,8 @@ public class MemberContoller {
             description = "public.member 테이블에 저장된 모든 회원을 조회한다."
     )
     @GetMapping
-    public ResponseEntity<List<MemberResponse>> findAll(){
-        return memberService.findAll();
+    public ResponseEntity<List<MemberInfo>> findAll(Pageable pageable){
+        return memberService.findAll(pageable);
     }
 
     @Operation(
@@ -32,8 +34,8 @@ public class MemberContoller {
             description = "요청으로 받은 회원 정보를 public.member 테이블에 등록한다."
     )
     @PostMapping
-    public ResponseEntity<MemberResponse> create(@RequestBody MemberRequest request){
-        return memberService.create(request);
+    public ResponseEntity<MemberInfo> create(@RequestBody MemberRequest request){
+        return memberService.create(request.toCommand());
     }
 
     @Operation(
@@ -41,8 +43,8 @@ public class MemberContoller {
             description = "요청으로 받은 회원 정보를 public.member 테이블에 수정한다."
     )
     @PutMapping("{id}")
-    public ResponseEntity<MemberResponse> update(@RequestBody MemberRequest request, @PathVariable String id){
-        return memberService.update(request, id);
+    public ResponseEntity<MemberInfo> update(@RequestBody MemberRequest request, @PathVariable String id){
+        return memberService.update(request.toCommand(), id);
     }
 
     @Operation(

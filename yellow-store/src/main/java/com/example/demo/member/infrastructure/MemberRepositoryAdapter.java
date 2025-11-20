@@ -1,0 +1,40 @@
+package com.example.demo.member.infrastructure;
+
+import com.example.demo.member.domain.Member;
+import com.example.demo.member.domain.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
+import java.util.UUID;
+
+public class MemberRepositoryAdapter implements MemberRepository {
+
+    private final MemberJpaRepository memberJpaRepository;
+
+    public MemberRepositoryAdapter(MemberJpaRepository memberJpaRepository) {
+        this.memberJpaRepository = memberJpaRepository;
+    }
+
+    @Override
+    public Page<Member> findAll(Pageable pageable) {
+        return memberJpaRepository.findAll(pageable);
+    }
+
+
+    @Override
+    public Optional<Member> findById(UUID id) {
+        return memberJpaRepository.findById(id);
+    }
+
+    @Override
+    public Member save(Member member) {
+        return memberJpaRepository.save(member);
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        memberJpaRepository.deleteById(id);
+    }
+
+}

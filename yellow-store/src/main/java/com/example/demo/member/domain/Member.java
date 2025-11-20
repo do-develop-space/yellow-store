@@ -1,12 +1,10 @@
-package com.example.demo.member;
+package com.example.demo.member.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Schema(description = "유저 정보")
@@ -60,23 +58,23 @@ public class Member {
 
     public Member() {}
 
-    public Member(UUID id,
+    private Member(UUID id,
                   String email,
                   String name,
-                  String password,
+//                  String password,
                   String phone,
                   String saltKey,
                   String flag) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.password = password;
+//        this.password = password;
         this.phone = phone;
         this.saltKey = saltKey;
         this.flag = flag;
     }
 
-    public Member(String id,
+    private Member(String id,
                   String email,
                   String name,
                   String password,
@@ -90,6 +88,14 @@ public class Member {
         this.phone = phone;
         this.saltKey = saltKey;
         this.flag = flag;
+    }
+
+    public static Member create(String email,
+                                String name,
+                                String phone,
+                                String saltKey,
+                                String flag) {
+        return new Member(UUID.randomUUID(), email, name, phone, saltKey, flag);
     }
 
     @PrePersist

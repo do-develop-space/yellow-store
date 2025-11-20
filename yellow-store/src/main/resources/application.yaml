@@ -1,17 +1,20 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: yellow-store
   datasource:
     # Postgres 서버 타임존을 서울(KST)로 맞추기 위해 옵션 추가
-    url: jdbc:postgresql://localhost:5432/store?currentSchema=public&options=-c%20TimeZone=Asia/Seoul
+    url: ${POSTGRES_URL:}
     driver-class-name: org.postgresql.Driver
-    username: postgres
-    password: postgres
+    username: ${POSTGRES_USER:}
+    password: ${POSTGRES_PASS:}
   jackson:
     time-zone: Asia/Seoul
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${USE_ORM_AUTO:}
     show-sql: true
     properties:
       hibernate:
@@ -27,3 +30,9 @@ springdoc:
 
 api:
   v1: api/v1
+
+payment:
+  toss:
+    secret-key: ${TOSS_SECRET_KEY:}
+    success-url: ${TOSS_SUCCESS_URL:http://localhost:8080/payments/success.html}
+    fail-url: ${TOSS_FAIL_URL:http://localhost:8080/payments/fail.html}

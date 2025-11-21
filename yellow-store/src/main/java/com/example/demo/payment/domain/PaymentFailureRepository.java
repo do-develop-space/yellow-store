@@ -1,4 +1,6 @@
 package com.example.demo.payment.domain;
 
-public class PaymentFailureRepository {
+public interface PaymentFailureRepository {
+
+    PaymentFailure save(PaymentFailure failure);
 }

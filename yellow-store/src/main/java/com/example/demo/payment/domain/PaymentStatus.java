@@ -1,4 +1,7 @@
 package com.example.demo.payment.domain;
 
-public class PaymentStatus {
+public enum PaymentStatus {
+    READY,
+    CONFIRMED,
+    FAILED
 }

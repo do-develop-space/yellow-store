@@ -21,6 +21,14 @@ spring:
         format_sql: true
         jdbc:
           time_zone: Asia/Seoul
+  batch:
+    jdbc:
+      initialize-schema: never
+#      always
+  task:
+    scheduling:
+      cron:
+        settlement: ${SETTLEMENT_CRON:0 0 0 * * *}
 
 springdoc:
   api-docs:
@@ -30,6 +38,11 @@ springdoc:
 
 api:
   v1: api/v1
+
+settlement:
+  async:
+    enabled: ${SETTLEMENT_ASYNC:false}
+    pool-size: ${SETTLEMENT_ASYNC_POOL_SIZE:5}
 
 payment:
   toss:

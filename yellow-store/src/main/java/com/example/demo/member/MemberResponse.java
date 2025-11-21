@@ -3,14 +3,14 @@ package com.example.demo.member;
 import com.example.demo.member.domain.Member;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Schema(description = "회원 응답 정보")
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberResponse {

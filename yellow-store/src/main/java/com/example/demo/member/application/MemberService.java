@@ -1,10 +1,10 @@
 package com.example.demo.member.application;
 
 import com.example.demo.common.ResponseEntity;
-import com.example.demo.member.domain.Member;
-import com.example.demo.member.domain.MemberRepository;
 import com.example.demo.member.application.dto.MemberCommand;
 import com.example.demo.member.application.dto.MemberInfo;
+import com.example.demo.member.domain.Member;
+import com.example.demo.member.domain.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,21 +50,21 @@ public class MemberService {
 
     public ResponseEntity<MemberInfo> update(MemberCommand command, String id) {
         // 기존 회원 정보 조회
-        Member existingMember = memberRepository.findById(UUID.fromString(id))
-                .orElseThrow(() -> new RuntimeException("회원을 찾을 수 없습니다: " + id));
-        
-        existingMember.setEmail(command.email());
-        existingMember.setName(command.name());
-        existingMember.setPassword(command.password());
-        existingMember.setPhone(command.phone());
-        existingMember.setSaltKey(command.saltKey());
-        existingMember.setFlag(command.flag());
-        // reg_id, reg_dt는 유지
-        // modify_id, modify_dt는 @PreUpdate에서 처리
-        
-        Member updatedMember = memberRepository.save(existingMember);
-        MemberInfo memberInfo = MemberInfo.from(updatedMember);
-        return new ResponseEntity<>(HttpStatus.OK.value(), memberInfo, 1);
+        UUID uuid = UUID.fromString(id);
+        Member member = memberRepository.findById(uuid)
+                .orElseThrow(() -> new IllegalArgumentException("Member not found: " + id));
+
+        member.updateInformation(
+                command.email(),
+                command.name(),
+                command.password(),
+                command.phone(),
+                command.saltKey(),
+                command.flag()
+        );
+
+        Member updated = memberRepository.save(member);
+        return new ResponseEntity<>(HttpStatus.OK.value(), MemberInfo.from(updated), 1);
     }
 
     public ResponseEntity<Void> delete(String id) {

@@ -2,13 +2,13 @@ package com.example.demo.member.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Schema(description = "유저 정보")
-@Data
+@Getter
 @Entity
 @Table(name = "\"member\"", schema = "public")
 public class Member {
@@ -96,6 +96,20 @@ public class Member {
                                 String saltKey,
                                 String flag) {
         return new Member(UUID.randomUUID(), email, name, phone, saltKey, flag);
+    }
+
+    public void updateInformation(String email,
+                                  String name,
+                                  String password,
+                                  String phone,
+                                  String saltKey,
+                                  String flag) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.saltKey = saltKey;
+        this.flag = flag;
     }
 
     @PrePersist

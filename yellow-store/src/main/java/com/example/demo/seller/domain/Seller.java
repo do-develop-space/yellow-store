@@ -2,13 +2,13 @@ package com.example.demo.seller.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Schema(description = "판매자 정보")
-@Data
+@Getter
 @Entity
 @Table(name = "\"seller\"", schema = "public")
 public class Seller {

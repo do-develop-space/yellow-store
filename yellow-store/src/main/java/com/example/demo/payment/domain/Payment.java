@@ -1,20 +1,14 @@
 package com.example.demo.payment.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
+@Schema(description = "결제 정보")
+@Getter
 @Entity
 @Table(name = "\"payment\"", schema = "public")
 public class Payment {
@@ -39,10 +33,10 @@ public class Payment {
     @Column(name = "method", length = 50)
     private String method;
 
-//    @Schema(description = "결제 상태")
-//    @Enumerated(EnumType.STRING)
-//    @Column(nullable = false, length = 20)
-//    private PaymentStatus status;
+    @Schema(description = "결제 상태")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private PaymentStatus status;
 
     @Schema(description = "결제 요청 시간")
     @Column(name = "requested_at")
@@ -72,7 +66,7 @@ public class Payment {
         this.paymentKey = paymentKey;
         this.orderId = orderId;
         this.amount = amount;
-//        this.status = PaymentStatus.READY;
+        this.status = PaymentStatus.READY;
     }
 
     public static Payment create(String paymentKey, String orderId, Long amount) {
@@ -80,7 +74,7 @@ public class Payment {
     }
 
     public void markConfirmed(String method, LocalDateTime approvedAt, LocalDateTime requestedAt) {
-//        this.status = PaymentStatus.CONFIRMED;
+        this.status = PaymentStatus.CONFIRMED;
         this.method = method;
         this.approvedAt = approvedAt;
         this.requestedAt = requestedAt;
@@ -88,7 +82,7 @@ public class Payment {
     }
 
     public void markFailed(String failReason) {
-//        this.status = PaymentStatus.FAILED;
+        this.status = PaymentStatus.FAILED;
         this.failReason = failReason;
     }
 
@@ -100,9 +94,9 @@ public class Payment {
         }
         createdAt = now;
         updatedAt = now;
-//        if (status == null) {
-//            status = PaymentStatus.READY;
-//        }
+        if (status == null) {
+            status = PaymentStatus.READY;
+        }
     }
 
     @PreUpdate

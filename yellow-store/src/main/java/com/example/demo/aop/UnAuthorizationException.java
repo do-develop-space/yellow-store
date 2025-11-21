@@ -1,4 +1,11 @@
 package com.example.demo.aop;
 
-public class UnAuthorizationException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(HttpStatus.UNAUTHORIZED)
+public class UnAuthorizationException extends RuntimeException {
+    public UnAuthorizationException(String msg) {
+        super(msg);
+    }
 }

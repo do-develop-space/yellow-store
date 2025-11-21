@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.UUID;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class SellerNotFoundException extends IllegalAccessException{
+public class NotFoundException extends IllegalAccessException{
 
-    public SellerNotFoundException(UUID id) {
+    public NotFoundException(UUID id) {
         super("Not found with id: " + id);
     }
 }

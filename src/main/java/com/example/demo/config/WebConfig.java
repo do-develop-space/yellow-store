@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.Enumeration;
 
 // MVC config, CROSS-ORIGN 체크
-@Configuration
+//@Configuration
 public class WebConfig {
 
     public WebMvcConfigurer corsConfig() {
@@ -54,7 +54,7 @@ public class WebConfig {
                         .allowedHeaders("*")
                         .allowCredentials(true);
 
-//                WebMvcConfigurer.super.addCorsMappings(registry);
+                WebMvcConfigurer.super.addCorsMappings(registry);
             }
         };
     }
